@@ -1,0 +1,7 @@
+
+# Ignore VS Code workspace settings
+.vscode/
+
+# Ignore Exercícios folder and its contents
+#Exercícios/
+
