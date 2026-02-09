@@ -1,4 +1,5 @@
-# Lista de Exercícios da Hatchtag Programação para treinamento de Python
+# Lista de Exercícios da Hatchtag Programação para treinamento de Python...
+## ...e de outras linguagens de programação.
 
 
 Conteúdo:
