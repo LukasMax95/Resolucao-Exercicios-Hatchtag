@@ -81,6 +81,7 @@ public class E3 {
         nome = Pattern.compile("\\b([a-z])")
             .matcher(nome.toLowerCase())
             .replaceAll(m -> m.group().toUpperCase());
+        System.out.println(nome);
         String firstname = "";
         if(pos != -1) firstname = nome.substring(0, pos);
         else firstname = nome;
@@ -99,12 +100,12 @@ public class E3 {
     }
     public static void main(String[] args) {
         //para testar cada resposta indivídualmente é só comentar/descomentar a chamada das funções
-        System.out.println("Calculadora de Imposto sobre Vendas");
-        Q1();
+        //System.out.println("Calculadora de Imposto sobre Vendas");
+        //Q1();
         System.out.println("Sistema de Cadastro de Colaborador (Setor de RH)");
         Q2();
-        System.out.println("Análise de Metas de Vendas (Setor Comercial)");
-        Q3();
+        //System.out.println("Análise de Metas de Vendas (Setor Comercial)");
+        //Q3();
         
     }
 }
