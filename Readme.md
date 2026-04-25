@@ -7,5 +7,8 @@ Conteúdo:
 - Pasta dos exercícios e dos gabaritos originais (python)
 
 
-Por enquanto estou fazendo as listas em Python (linguagem promovida pela Hatchtag) e em Java (primeira escolha pessoal para resolver as questões em outra linguagem)
+Por enquanto estava fazendo as listas em Python (linguagem promovida pela Hatchtag) e em Java (primeira escolha pessoal para resolver as questões em outra linguagem), mas, decidi concluir os exercícios nas outras línguagens (que não sejam o python) para diversificação.
+
+Rexpostas dos exercícios concluídos finalizados em Java já disponíveis.
+
 - após resolver todos os exercícios em Java, vou experimentar nas outras duas linguagens.
