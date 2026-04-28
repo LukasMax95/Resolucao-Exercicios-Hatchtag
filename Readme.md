@@ -3,7 +3,7 @@
 
 
 Conteúdo:
-- Arquivo MyAnswer: Resposta dos Exercícios em Python, Java, C++ e JavaScript
+- Arquivo MyAnswer: Resposta dos Exercícios em Python, Java, C++, Rust e Go
 - Pasta dos exercícios e dos gabaritos originais (python)
 
 
