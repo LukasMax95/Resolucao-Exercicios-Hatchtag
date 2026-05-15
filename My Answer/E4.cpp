@@ -1,0 +1,131 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+#include <iomanip>
+#include <algorithm>
+#include <cctype>
+#include <locale>
+#include <regex>
+#include <cmath>
+#include <stdexcept>
+
+using namespace std;
+
+void Q1(){
+    int vendas[] = {1500, 2000, 800, 3500, 1200};
+    int sum = 0;
+    float avr = 0;
+    int maior_venda = 0, menor_venda = 100000, n = size(vendas);
+    #pragma omp parallel for reduction(+:sum, avr) reduction(max:maior_venda) reduction(min:menor_venda)
+    for (int i = 0; i < n; i++){
+        sum += vendas[i];
+        avr += (float)vendas[i]/n;
+        if(maior_venda < vendas[i]) maior_venda = vendas[i];
+        if(menor_venda > vendas[i]) menor_venda = vendas[i];
+    }
+    cout << "Relatório:\n - Total de vendas: " << sum
+                << "\n - Média de Vendas: " << avr << setprecision(2)
+                << "\n - Maior Venda: " << maior_venda
+                << " \n - Menor Venda: " << menor_venda << endl;
+}
+
+void Q2(){
+    vector<string> estoque = {"monitor", "teclado", "mouse", "headseat"};
+    string novoItem = "webcam";
+    string nomeAtualizar = "teclado";
+    string atualizarNome = "teclado_maníaco";
+    string removerItem = "mouse";
+    for (const string& item : estoque) cout << "| " << item << " |";
+    cout<<endl;
+    estoque.push_back(novoItem);
+    for (const string& item : estoque) cout << "| " << item << " |";
+    cout<<endl;
+    for (int i = 0; i < estoque.size(); i++){
+        if(estoque[i] == nomeAtualizar){
+            estoque[i] = atualizarNome;
+            cout<<"Item atualizado!\n";
+            break;
+        }
+    }
+    for (const string& item : estoque) cout << "| " << item << " |";
+    cout<<endl;
+    for (int i = 0; i < estoque.size(); i++){
+        if(estoque[i] == removerItem){
+            estoque.erase(estoque.begin() + i);
+            cout<<"Item removido!\n";
+            break;
+        }
+    }
+    for (const string& item : estoque) cout << "| " << item << " |";
+    cout<<endl;
+    
+}
+
+void Q3(){//Ordenação de Preços
+    vector<int> precos = {50, 80, 20, 150, 40};
+    int min = 100000, max = 0;
+    int i = 0, j = precos.size()-1;
+    for(const int& preco : precos) cout << preco << " ";
+    cout<<endl;
+    while(i <= j){
+        int temp = 0;
+        if(precos[i] > precos[j]){
+            temp = precos[j];
+            precos[j] = precos[i];
+            precos[i] = temp;
+            j--;
+        }else{
+            j--;
+        }
+        cout << i << " " << j << endl;
+        if(i == j) {
+            j = precos.size() -1;
+            i++;
+            if(i == precos.size() - 1) break;
+        }
+        for(const int& preco : precos) cout << preco << " ";
+        cout<<endl;
+    }
+    cout<<"Lista Ordenada:\n";
+    for(const int& preco : precos) cout << preco << " ";
+    cout<<endl;
+    vector<int> top_fretes(precos.end()-2, precos.end());
+    cout<<"Top Fretes:\n";
+    for(const int& preco : top_fretes) cout << preco << " ";
+    cout<<endl;
+    
+}
+
+void Q4(){
+    vector<string> rota = {"São Paulo", "Jundiaí", "Itú", "Sorocaba"};
+    vector<string> novasCidades = {"Itu", "Valinhos"};
+    string identificarIndice = "Sorocaba";
+    rota.insert(rota.end(), novasCidades.begin(), novasCidades.end());
+    int pos = 0;
+    bool flag = true;
+    for(const string& cidade : rota){
+        cout << cidade << " ";
+        if(cidade == identificarIndice) flag = false;
+        if(flag) pos++;
+    } 
+    cout<<endl;
+    cout<<"Indice de "<<identificarIndice<<": "<<pos<<endl;
+    cout<<"Sorocaba é a "<<pos+1<<"a cidade da rota.\n";
+    
+}
+
+void Q5(){
+
+}
+
+
+int main(){
+    //Q1();
+    //Q2();
+    //Q3();
+    Q4();
+    return 0;
+}
