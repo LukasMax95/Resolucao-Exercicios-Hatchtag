@@ -14,6 +14,49 @@
 
 using namespace std;
 
+void replaceAll(string& str, const string& from, const string& to) {
+    if(from.empty()) return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // Avança para não pegar a mesma string substituída
+    }
+}
+
+void trimString(string &s) {
+    s.erase(s.begin(), find_if(s.begin(), s.end(), [](unsigned char ch) { return !isspace(ch); }));
+    s.erase(find_if(s.rbegin(), s.rend(), [](unsigned char ch) { return !isspace(ch); }).base(), s.end());
+}
+
+string removeAllButLastDot(string s){
+    int last = s.find_last_of('.');
+    if(last == string::npos) {
+        s.erase(remove(s.begin(), s.end(), '.'), s.end()); // Remove todos os pontos
+        return s;
+    }
+    
+    string before = s.substr(0, last);
+    before.erase(remove(before.begin(), before.end(), '.'), before.end());
+    
+    string after = s.substr(last);
+    if((s.length() - last) > 3) {
+        after.erase(remove(after.begin(), after.end(), '.'), after.end());
+        after += ".00";
+    }
+    return before + after;
+}
+
+double extractBillingValue(){
+    string billing;
+    getline(cin >> ws, billing);
+    transform(billing.begin(), billing.end(), billing.begin(), ::toupper);
+    replaceAll(billing, "RS", "");
+    replaceAll(billing, "R$", "");
+    trimString(billing);
+    replaceAll(billing, ",", ".");
+    return stod(removeAllButLastDot(billing));
+}
+
 void Q1(){
     int vendas[] = {1500, 2000, 800, 3500, 1200};
     int sum = 0;
@@ -100,32 +143,59 @@ void Q3(){//Ordenação de Preços
 }
 
 void Q4(){
-    vector<string> rota = {"São Paulo", "Jundiaí", "Itú", "Sorocaba"};
+    vector<string> rota = {"São Paulo", "Jundiaí", "Campinas", "Sorocaba"};
     vector<string> novasCidades = {"Itu", "Valinhos"};
     string identificarIndice = "Sorocaba";
     rota.insert(rota.end(), novasCidades.begin(), novasCidades.end());
     int pos = 0;
     bool flag = true;
     for(const string& cidade : rota){
-        cout << cidade << " ";
+        cout << cidade;
         if(cidade == identificarIndice) flag = false;
         if(flag) pos++;
+        if(&rota.back() == &cidade) cout << "." << endl;
+        else cout << ", ";
     } 
-    cout<<endl;
     cout<<"Indice de "<<identificarIndice<<": "<<pos<<endl;
     cout<<"Sorocaba é a "<<pos+1<<"a cidade da rota.\n";
     
 }
 
 void Q5(){
-
+    vector<float> precos = {100.0, 200.0, 300.0, 500.0};
+    vector<string> vinhos = {"Branco", "Tinto", "Rose", "Champagne"};
+    cout<<"Lista de Produtos:\n";
+    for(int i = 0; i < vinhos.size(); i++){
+        cout << vinhos[i] << ": S" << fixed << setprecision(2) << precos[i] << ((i+1 == vinhos.size()) ? ".\n" : ";\n");
+    }
+    string nome_produto;
+    while(true){
+        cin >> nome_produto;
+        if (find(vinhos.begin(), vinhos.end(), nome_produto) != vinhos.end()) {
+                break;
+        } else {
+                cout << "O vinho " << nome_produto << " nao foi encontrado." << endl;
+        }
+        
+    }
+    cout << "Digite o novo preço do produto: ";
+    float novo_preco = extractBillingValue();
+    for(int i = 0; i < vinhos.size(); i++){
+        if(nome_produto == vinhos[i]) precos[i] = novo_preco;
+    }
+    cout<<"Lista atualizada.\n";
+    for(int i = 0; i < vinhos.size(); i++){
+        cout << vinhos[i] << ": S" << fixed << setprecision(2) << precos[i] << ((i+1 == vinhos.size()) ? ".\n" : ",\n");
+    }
 }
+
 
 
 int main(){
     //Q1();
     //Q2();
     //Q3();
-    Q4();
+    //Q4();
+    Q5();
     return 0;
 }
