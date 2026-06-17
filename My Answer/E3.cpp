@@ -106,7 +106,7 @@ void capitalyize(string &s){
 
 double extractBillingValue(){
     string billing;
-    getline(cin, billing);
+    getline(cin >> ws, billing);
     transform(billing.begin(), billing.end(), billing.begin(), ::toupper);
     replaceAll(billing, "RS", "");
     replaceAll(billing, "R$", "");
