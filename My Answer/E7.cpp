@@ -62,7 +62,7 @@ void Q5(){
         {"tablet", 2500},
         {"notebook", 5000}
     };
-    cout<<"Digite o percentual de aumento: "<<endl;
+    cout<<"Digite o percentual de aumento: ";
     float percentual;
     cin >> percentual;
     cout<<"Novo Catálogo:"<<endl;
