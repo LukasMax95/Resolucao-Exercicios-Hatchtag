@@ -42,6 +42,7 @@ void Q2(){
     };
 
     string produto;
+    cout << "Digite o nome do produto no estoque: ";
     getline(cin, produto);
     replaceAll(produto, " ", "");
     transform(produto.begin(), produto.end(), produto.begin(), ::tolower);
